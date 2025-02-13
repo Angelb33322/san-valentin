@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f8d8d8;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.2s; /* Añadir transición suave */
+        }
+        #celebration {
+            display: none;
+            margin-top: 20px;
+        }
+        .hearts {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: url('https://img1.picmix.com/output/stamp/normal/8/4/8/7/327848_294cb.gif') no-repeat center;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Feliz San Valentín!</h1>
+    <p>Rut, ¿Quisieras ser mi San Valentín?</p>
+    <button id="yesBtn">Sí</button>
+    <button id="noBtn">No</button>
+
+    <div id="celebration" class="hearts"></div>
+
+    <script>
+        const messages = [
+            "Ya no me quieres?",
+            "¿Segura?",
+            "Yo sé que sí, no te hagas la loca.",
+            "De mí no te escapas.",
+            "Ámame preciosa.",
+            "No hay chance.",
+            "Sigue intentando.",
+            "Sigue y te beso."
+        ];
+
+        document.getElementById('yesBtn').onclick = function() {
+            document.getElementById('celebration').style.display = 'block';
+            this.disabled = true; // Deshabilitar el botón "Sí"
+            document.getElementById('noBtn').disabled = true; // Deshabilitar el botón "No"
+        };
+
+        document.getElementById('noBtn').onclick = function() {
+            const bodyWidth = window.innerWidth - 100; // Resto 100 para evitar que se salga de la pantalla
+            const bodyHeight = window.innerHeight - 100; // Resto 100 para evitar que se salga de la pantalla
+            const randomX = Math.random() * bodyWidth;
+            const randomY = Math.random() * bodyHeight;
+            this.style.position = 'absolute';
+            this.style.left = randomX + 'px';
+            this.style.top = randomY + 'px';
+
+            // Reemplazar el texto del botón con un mensaje aleatorio
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            this.textContent = randomMessage;
+
+            // Reducir el tamaño del botón y del texto
+            const currentWidth = parseInt(window.getComputedStyle(this).width);
+            const currentHeight = parseInt(window.getComputedStyle(this).height);
+            const currentFontSize = parseInt(window.getComputedStyle(this).fontSize);
+
+            // Reducir el tamaño al 90%
+            this.style.width = (currentWidth * 0.9) + 'px';
+            this.style.height = (currentHeight * 0.9) + 'px';
+            this.style.fontSize = (currentFontSize * 0.9) + 'px';
+        };
+    </script>
+</body>
+</html>
